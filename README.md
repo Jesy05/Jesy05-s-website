@@ -1,4 +1,4 @@
-## .˚⊹ ࣪ 𓆝 ˖ ⋆ Systems and Industrial Engineering student  ⋆.˚ 𓆝 ⊹ ࣪ ˖
+## ˖⊹ ࣪˖𓆝 .˚ ⋆ Systems and Industrial Engineering student  ⋆.˚ 𓆝 ⊹ ࣪ ˖
 
 <!--
 **Jesy05/Jesy05** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
