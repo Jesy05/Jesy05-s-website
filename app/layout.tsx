@@ -2,7 +2,7 @@
 import "./globals.css"; // "llave" que activa Tailwind y colores personalizados
 
 export const metadata = {
-  title: 'Jesy González | Personal Site', // Aprovechamos para poner un título profesional
+  title: 'Jesy González | Personal Site', // titulo de la pestaña
   description: 'Industrial & Systems Engineering Student Portfolio', //
 }
 
