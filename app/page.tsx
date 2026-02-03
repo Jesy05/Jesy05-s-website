@@ -1,41 +1,47 @@
 // app/page.tsx
-"use client"; // Necesario para usar animaciones y botones
-
-import { motion } from "framer-motion"; //
+"use client";
+import { motion } from "framer-motion";
+import BubbleLink from "./components/BubbleLink"; // Ahora el error desaparecerá
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-y2k-navy text-white flex flex-col overflow-hidden font-sans">
+    <main className="min-h-screen flex flex-col overflow-hidden">
       
-      {/* SECCIÓN SUPERIOR: EL ACUARIO */}
-      <div className="h-[45vh] bg-gradient-to-b from-y2k-blue/30 to-y2k-navy relative flex flex-col items-center justify-center border-b-2 border-y2k-blue/20">
-        
-        {/* Tu Icono Central Animado */}
+      {/* 🌊 SECCIÓN SUPERIOR: CELESTE */}
+      <div className="h-[40vh] bg-y2k-blue relative flex flex-col items-center justify-center border-b-4 border-y2k-navy">
         <motion.div 
-          animate={{ y: [0, -15, 0] }} // Efecto de flotar
+          animate={{ y: [0, -15, 0] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-          className="relative group cursor-pointer"
+          className="w-32 h-32 rounded-full border-4 border-y2k-navy bg-white/30 backdrop-blur-sm flex items-center justify-center shadow-[6px_6px_0px_rgba(27,38,59,1)]"
         >
-          {/* El contenedor circular de tu dibujo */}
-          <div className="w-40 h-40 rounded-full border-4 border-y2k-lavender bg-white/5 backdrop-blur-md flex items-center justify-center shadow-[0_0_30px_rgba(162,210,255,0.3)] overflow-hidden">
-            {/* Cuando tengas tu dibujo, reemplaza este texto por <img src="/tu-dibujo.png" /> */}
-            <span className="text-y2k-blue font-bold text-center p-4">Tu Arte Aquí</span>
-          </div>
-
-          {/* Un pequeño adorno flotante */}
-          <div className="absolute -top-4 -right-4 w-10 h-10 bg-y2k-pink rounded-full blur-xl opacity-50 animate-pulse" />
+          <span className="text-y2k-navy font-bold">Tu Arte</span>
         </motion.div>
-
-        <h1 className="mt-6 text-2xl font-bold tracking-widest text-y2k-blue drop-shadow-lg">
-          JESY GONZÁLEZ
+        <h1 className="mt-4 text-y2k-navy font-black tracking-tighter text-2xl uppercase">
+          Jesy González
         </h1>
       </div>
 
-      {/* SECCIÓN INFERIOR: PRÓXIMAMENTE LOS WIDGETS */}
-      <div className="h-[55vh] p-10 flex items-center justify-center opacity-40 italic">
-        (Próximo paso: Integrar tus burbujas de links y los widgets de Paint)
-      </div>
+      {/* 🖥️ SECCIÓN INFERIOR: BLANCO */}
+      <div className="h-[60vh] bg-white relative p-10 flex flex-col items-center gap-8">
+        
+        {/* Burbujas Flotantes */}
+        <div className="flex gap-4">
+          <BubbleLink text="GitHub" href="#" color="bg-y2k-lavender" />
+          <BubbleLink text="LinkedIn" href="#" color="bg-y2k-pink" delay={0.5} />
+        </div>
 
+        {/* Widget Estilo Paint */}
+        <div className="w-full max-w-sm bg-[#C0C0C0] border-2 border-y2k-navy shadow-[6px_6px_0px_rgba(27,38,59,1)]">
+          <div className="bg-y2k-navy text-white px-2 py-1 text-xs font-bold flex justify-between">
+            <span>Status.exe</span>
+            <span>X</span>
+          </div>
+          <div className="p-4 text-y2k-navy font-mono text-sm">
+            Ready to build something cute & secure.
+          </div>
+        </div>
+
+      </div>
     </main>
   );
 }

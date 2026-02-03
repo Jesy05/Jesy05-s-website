@@ -1,10 +1,14 @@
 /* app/globals.css */
 @import "tailwindcss";
 
-:root {
-  /* Definimos tu paleta Y2K directamente aquí */
+@theme {
   --color-y2k-navy: #1B263B;
   --color-y2k-lavender: #CDB4DB;
   --color-y2k-blue: #A2D2FF;
   --color-y2k-pink: #FFC8DD;
+}
+
+body {
+  background-color: white; /* */
+  color: #1B263B; /* Navy para el texto por defecto */
 }
