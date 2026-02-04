@@ -55,10 +55,10 @@ export default function Home() {
       <section className="flex-1 relative flex items-center justify-center">
 
         {/* Contenedor tipo "mapa mental" */}
-        <div className="relative w-[500px] h-[350px]"> 
+        <div className="relative w-[600px] h-[350px]"> 
 
           {/* Burbuja izquierda */}
-          <div className="absolute left-[-30px] top-24">
+          <div className="absolute left-[-40px] top-24">
             <BubbleLink
               text="My Git & LinkedIn"
               color="bg-y2k-lavender"
