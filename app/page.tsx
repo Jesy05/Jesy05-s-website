@@ -88,7 +88,7 @@ export default function Home() {
             <BubbleLink
               text="Contact"
               color="bg-y2k-pink"
-              icon="/icons/contact-icon.svg"
+              icon="icons/contact-icon.svg"
               onClick={() => setShowContact(true)}
             />
           </div>
