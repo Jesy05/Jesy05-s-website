@@ -79,6 +79,7 @@ export default function Home() {
             <BubbleLink
               text="Links & Socials"
               color="bg-y2k-lavender"
+              icon="icons/link-icon.svg"
               onClick={() => setShowProjects(true)}
             />
           </div>
