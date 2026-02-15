@@ -6,19 +6,19 @@ import BubbleLink from "./components/BubbleLink";
 import DraggableWidget from "./components/DraggableWidget";
 
 export default function Home() {
-  // Estados para abrir/cerrar ventanas
   const [showProjects, setShowProjects] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
   const [showContact, setShowContact] = useState(false);
 
-  // Estado para las posiciones de las burbujas
-  const [bubblePositions, setBubblePositions] = useState<number[]>([]);
+  // Dos capas de burbujas para dar profundidad
+  const [largeBubbles, setLargeBubbles] = useState<number[]>([]);
+  const [smallBubbles, setSmallBubbles] = useState<number[]>([]);
 
   useEffect(() => {
-    // TUS POSICIONES MANUALES (0 = Izquierda total, 50 = Centro, 100 = Derecha total)
-    // He distribuido un poco más los números para que cubran toda la pantalla
-    const manualPositions = [5, 15, 35, 60, 80, 95]; 
-    setBubblePositions(manualPositions);
+    // Capa 1: Burbujas grandes
+    setLargeBubbles([5, 35, 60, 95]); 
+    // Capa 2: Burbujas pequeñas en posiciones intermedias
+    setSmallBubbles([15, 25, 45, 75, 85]);
   }, []);
 
   return (
@@ -29,29 +29,54 @@ export default function Home() {
         className="relative h-[35vh] flex items-center justify-center border-b-4 border-y2k-navy overflow-hidden"
         style={{ background: "linear-gradient(to bottom, #8ebff9, #c4d6fc)" }}
       >
-        {/* Burbujas flotando */}
-        {bubblePositions.map((leftPos, i) => (
-          <motion.div
-            key={i}
-            className="absolute bottom-0 w-3 h-3 bg-white/40 rounded-full"
-            // 👇 EL CAMBIO CLAVE: Usamos 'style={{ left: ... }}'
-            // Esto obliga a la burbuja a posicionarse desde el borde izquierdo de la pantalla
+        {/* CAPA 1: Burbujas Grandes */}
+        {largeBubbles.map((leftPos, i) => (
+          <motion.img
+            key={`large-${i}`}
+            src="/bubble.svg" 
+            alt="bubble"
+            className="absolute bottom-0 w-25 h-25 opacity-100 z-10"
             style={{ left: `${leftPos}%` }}
-            
-            // Ya no usamos 'x' aquí, solo animamos la subida (y)
-            initial={{ y: 0 }} 
-            animate={{ y: -220 }}
-            
+            initial={{ y: 0, opacity: 0 }} 
+            animate={{ 
+              y: -300, 
+              opacity: [0, 1, 1, 0], 
+              x: [0, 15, -15, 0] 
+            }}
             transition={{
-              duration: 6 + (i % 3), 
+              duration: 8 + (i % 3), 
               repeat: Infinity,
-              delay: i * 0.7
+              delay: i * 1.2,
+              ease: "linear"
+            }}
+          />
+        ))}
+
+        {/* CAPA 2: Burbujas Pequeñas (Variación) */}
+        {smallBubbles.map((leftPos, i) => (
+          <motion.img
+            key={`small-${i}`}
+            src="/bubble.svg" 
+            alt="bubble"
+            className="absolute bottom-0 w-10 h-10 opacity-80 z-0" // Menos opacidad y detrás (z-0)
+            style={{ left: `${leftPos}%` }}
+            initial={{ y: 0, opacity: 0 }} 
+            animate={{ 
+              y: -300, 
+              opacity: [0, 0.8, 0.8, 0], 
+              x: [0, -10, 10, 0] // Movimiento lateral opuesto
+            }}
+            transition={{
+              duration: 5 + (i % 2), // Suben más rápido por ser "ligeras"
+              repeat: Infinity,
+              delay: i * 0.5,
+              ease: "linear"
             }}
           />
         ))}
       </section>
 
-      {/* 🎨 CÍRCULO + NOMBRE (CENTRADOS EN LA LÍNEA) */}
+      {/* 🎨 CÍRCULO + NOMBRE */}
       <div className="absolute left-1/2 top-[35vh] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-20">
         <motion.div
           animate={{ y: [0, -10, 0] }}
@@ -68,13 +93,9 @@ export default function Home() {
         </h1>
       </div>
 
-      {/* 🖥️ PARTE DE ABAJO (FONDO BLANCO) */} 
+      {/* 🖥️ PARTE DE ABAJO */} 
       <section className="flex-1 relative flex items-center justify-center">
-
-        {/* Contenedor de burbujas (Links) */}
         <div className="relative w-[600px] h-[350px]"> 
-
-          {/* Burbuja Izquierda: Links & Socials */}
           <div className="absolute left-[-50px] top-24">
             <BubbleLink
               text="Links & Socials"
@@ -84,7 +105,6 @@ export default function Home() {
             />
           </div>
 
-          {/* Burbuja Derecha: Contacto (Con Ícono) */}
           <div className="absolute right-0 top-24">
             <BubbleLink
               text="Contact"
@@ -94,18 +114,16 @@ export default function Home() {
             />
           </div>
 
-          {/* Burbuja Centro Abajo: Quién soy */}
           <div className="absolute left-1/2 -translate-x-1/2 bottom-20">
             <BubbleLink
               text="Who I am & what I do"
               color="bg-y2k-blue"
+              icon="/bubble.svg"
               onClick={() => setShowAbout(true)}
             />
           </div>
-
         </div>
 
-        {/* 🪟 VENTANAS (WIDGETS) */}
         <AnimatePresence>
           {showProjects && (
             <DraggableWidget
@@ -156,7 +174,6 @@ export default function Home() {
             </DraggableWidget>
           )}
         </AnimatePresence>
-
       </section>
     </main>
   );
