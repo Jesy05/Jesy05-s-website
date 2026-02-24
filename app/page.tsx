@@ -35,7 +35,8 @@ export default function Home() {
             key={`large-${i}`}
             src="/bubble.svg" 
             alt="bubble"
-            className="absolute bottom-0 w-25 h-25 opacity-100 z-10"
+            // Cambié w-25 h-25 por dimensiones personalizadas para que funcionen siempre en Tailwind
+            className="absolute bottom-0 w-[100px] h-[100px] opacity-100 z-10"
             style={{ left: `${leftPos}%` }}
             initial={{ y: 0, opacity: 0 }} 
             animate={{ 
@@ -58,16 +59,16 @@ export default function Home() {
             key={`small-${i}`}
             src="/bubble.svg" 
             alt="bubble"
-            className="absolute bottom-0 w-10 h-10 opacity-80 z-0" // Menos opacidad y detrás (z-0)
+            className="absolute bottom-0 w-10 h-10 opacity-80 z-0"
             style={{ left: `${leftPos}%` }}
             initial={{ y: 0, opacity: 0 }} 
             animate={{ 
               y: -300, 
               opacity: [0, 0.8, 0.8, 0], 
-              x: [0, -10, 10, 0] // Movimiento lateral opuesto
+              x: [0, -10, 10, 0] 
             }}
             transition={{
-              duration: 5 + (i % 2), // Suben más rápido por ser "ligeras"
+              duration: 5 + (i % 2), 
               repeat: Infinity,
               delay: i * 0.5,
               ease: "linear"
@@ -76,19 +77,24 @@ export default function Home() {
         ))}
       </section>
 
-      {/* 🎨 CÍRCULO + NOMBRE */}
+      {/* 🎨 CÍRCULO CON AVATAR + NOMBRE */}
       <div className="absolute left-1/2 top-[35vh] -translate-x-1/2 -translate-y-1/2 flex flex-col items-center z-20">
         <motion.div
           animate={{ y: [0, -10, 0] }}
           transition={{ duration: 4, repeat: Infinity }}
-          className="w-36 h-36 rounded-full border-4 border-y2k-navy bg-white shadow-[6px_6px_0px_rgba(27,38,59,1)] flex items-center justify-center"
+          className="w-40 h-40 rounded-full border-4 border-y2k-navy bg-[#c4d6fc] shadow-[6px_6px_0px_rgba(27,38,59,1)] flex items-center justify-center overflow-hidden"
         >
-          <span className="text-y2k-navy font-bold text-xs uppercase text-center px-4">
-            Tu Arte Aquí
-          </span>
+          {/* Aquí está tu avatar pixel art */}
+          <motion.img 
+            src="/avatar.svg" 
+            alt="Jesy Avatar"
+            className="w-full h-full object-cover"
+            whileHover={{ scale: 1.1 }} 
+            transition={{ type: "spring", stiffness: 300 }}
+          />
         </motion.div>
 
-        <h1 className="mt-4 text-y2k-navy font-black tracking-widest text-xl uppercase">
+        <h1 className="mt-4 text-y2k-navy font-black tracking-widest text-xl uppercase bg-white/80 px-2 rounded">
           Jesy González
         </h1>
       </div>
